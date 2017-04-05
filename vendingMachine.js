@@ -1,4 +1,4 @@
-const Person = require('./person.js')
+const Person = require('./person').default
 
 export default class VendingMachine {
   constructor(status, credits, change, selection) {
