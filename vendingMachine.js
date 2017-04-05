@@ -1,29 +1,19 @@
 const Person = require('./person').default
 
 export default class VendingMachine {
-  constructor(status, credits, change, selection) {
-    this.status = status
+  constructor(credits=0, change=0, selection) {
     this.credits = credits
     this.selection = selection
-    // status can be ["idle", "credited", "vending"]
-    // this.state = {
-    //   status: "idle",
-    //   credits: 0,
-    //   change: 0,
-    //   selection: null
-    // }
+    this.change = change
   }
 
-  // reset() {
-  //   this.constructor()
-  // }
+  insertCredit(credit) {
+    this.credits += credit
+  }
 
 }
 
-export function insertCredit(vendingMachine, person, creditsGiven) {
-  const { credits, selection } = vendingMachine
-  return {
-    vendingMachine: new VendingMachine("credited", credits + creditsGiven, 0, selection),
-    person: new Person(person.name, person.credits - creditsGiven)
-  }
+export function payUp(vendingMachine, person, creditsGiven) {
+  vendingMachine.insertCredit(creditsGiven)
+  person.removeCredit(creditsGiven)
 }

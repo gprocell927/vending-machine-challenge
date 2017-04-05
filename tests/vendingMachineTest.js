@@ -4,7 +4,7 @@ require('babel-core/register')({
 
 const assert = require('chai').assert
 const VendingMachine = require('../vendingMachine').default
-const { insertCredit } = require('../vendingMachine')
+const { payUp } = require('../vendingMachine')
 const Person = require('../person').default
 
 describe('Vending Machine', function() {
@@ -15,14 +15,15 @@ describe('Vending Machine', function() {
     const vendingMachine = new VendingMachine()
 
     // Alex inserts a dollar into the vending machine
-    const result = insertCredit(vendingMachine, alex, 100)
+    payUp(vendingMachine, alex, 100)
 
-    // Assert the current status of the vendingMachine is 'credited' after credits inserted
-    assert.equal(result.vendingMachine.status, 'credited')
     // Assert the total number of credits is 100 cents ($1.00) after credits inserted
-    assert.equal(result.vendingMachine.credits, 100)
+    assert.equal(vendingMachine.credits, 100)
     // Assert the total number of change is 0 cents ($0.00) before selection is made
-    assert.equal(result.vendingMachine.change, 0)
+    assert.equal(vendingMachine.change, 0)
+
+    assert.equal(alex.credits, 400)
+
   });
 
 });
