@@ -1,0 +1,56 @@
+person = {
+  credits: 500,
+  vendedStuff: [],
+}
+
+vm = {
+  contents: contents,
+  enteredCredits
+}
+
+//make sure fns return new objects, avoid mutative data for testing purposes and good life choices
+
+enterCredits = (person, vm, amount) => {
+  if (person.credits >= amount) {
+    const personCredits = person.credits - amount
+    const vmCredits = vm.enterdCredits + amount
+    // mutative way person.decreaseCredits(amount)
+    const updatedPerson = new Person(personCredits)
+    const updatedVM = new VM(vmCredits, vm.contents)
+    return {
+      person: updatedPerson,
+      vm: updatedVM
+    }
+  } else {
+    console.log("need mo' money!")
+    return ...
+  }
+}
+
+Person.prototype.enterCredits(vm, amount) => {
+  if (this.credits >= amount) {
+    this.credits -= amount
+    vm.increaseCredits(amount)
+  } else {
+    console.log("need mo' money!")
+  }
+}
+
+contents = [
+   slot1,  slot2, ... ,  slot7,
+   slot8,  slot9, ... , slot14,
+  slot15, slot16, ... , slot21,
+  ...
+  slot43, slot44, ... , slot49,
+]
+
+slot = {
+  price: number
+  contents: array of product (goes from front (by the glass) to back)
+}
+
+[ chips, null, chocolate bunny ]
+
+product = {
+  name: string
+}

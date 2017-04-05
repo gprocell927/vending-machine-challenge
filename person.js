@@ -1,8 +1,7 @@
 export default class Person {
-  constructor() {
+  constructor(name, credits) {
     // each person starts out with 5 dollars
-    this.state = {
-      credits = 500      
+      this.name = name
+      this.credits = 500
     }
   }
-}

@@ -1,0 +1,29 @@
+vm
+  rows
+    slots
+      contents: something || null
+
+
+[
+  row1,
+  row2,
+  row3,
+]
+
+
+row = [
+  slot1, slot2, slot3, ...
+]
+
+
+slot1a = {
+  priceInCents: 100,
+  contents: [ milky way, milky way, null, chips ],
+}
+
+// some person buys from slot1a, result is slot1b
+
+slot1b = {
+  priceInCents: 100,
+  contents: [ milky way, null, chips, null ],
+}
