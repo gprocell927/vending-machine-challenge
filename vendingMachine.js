@@ -7,13 +7,43 @@ export default class VendingMachine {
     this.change = change
   }
 
-  insertCredit(credit) {
-    this.credits += credit
+  insertCredit(person, credit) {
+    if (person.removeCredit(credit)) {
+      this.credits += credit
+    }
   }
 
-}
+  selectTreat(selection) {
+    // inventory
+    if (selection.price === this.credits) {
+      this.selection = selection
+      this.change = this.credits - selection.price
+      this.credits -= selection.price
+      return true
+      vend(selection)
+    } else if (selection.price < this.credits) {
+      this.selection = selection
+      this.change = this.credits - selection.price
+      this.credits -= selection.price
+      return true
+      vend(selection)
+    } else {
+      console.log('Please deposit more money')
+      return false
+    }
+  }
 
-export function payUp(vendingMachine, person, creditsGiven) {
-  vendingMachine.insertCredit(creditsGiven)
-  person.removeCredit(creditsGiven)
+  giveChange(person, candy){
+    person.credits += this.change
+  }
+
+  vend(person,candy) {
+    // inventory
+    person.selection = candy.name
+    this.giveChange(person, candy)
+    return candy
+
+    // give change
+  }
+
 }
