@@ -103,6 +103,22 @@ describe('Vending Machine', function() {
     })
   })
 
+  context('giveChange Function', () => {
+    it('should give change if the user pays more than what the treat costs', () => {
+      const user = new Person()
+      const vendingMachine = new VendingMachine()
+      const candy = new Treat('Starbursts', 100)
+
+      vendingMachine.insertCredit(user, 300)
+      vendingMachine.selectTreat(candy)
+
+      assert.equal(candy.price, 100)
+      assert.equal(vendingMachine.change, 200)
+      assert.equal(user.credits, 400)
+    })
+  })
+
+
 
   // assertions to come :
     // Treat qty/selection  : mapping?
