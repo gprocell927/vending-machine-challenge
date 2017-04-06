@@ -35,7 +35,7 @@ describe('Vending Machine', function() {
 
     vendingMachine.selectTreat(candy)
     assert.equal(vendingMachine.selection, candy)
-    assert.equal(candy.name, 'Almond Joy')
+    assert.equal(vendingMachine.selection.name, 'Almond Joy')
     assert.equal(candy.price, 75)
   })
 
@@ -76,6 +76,34 @@ describe('Vending Machine', function() {
     vendingMachine.vend(user,candy)
     assert.equal(user.credits, 425)
   })
+
+  context('insertCredit Function', () => {
+    it('should add credit to the vending machine if the user has credits to give', () => {
+      const user = new Person()
+      const vendingMachine = new VendingMachine()
+
+      vendingMachine.insertCredit(user, 300)
+      assert.equal(vendingMachine.credits, 300)
+    })
+  })
+
+  context('selectTreat Function', () => {
+    it('should approve selection if the user has deposited sufficient credits', () => {
+      const user = new Person()
+      const vendingMachine = new VendingMachine()
+      const candy = new Treat('Starbursts', 100)
+
+      vendingMachine.insertCredit(user, 300)
+      assert.equal(vendingMachine.credits, 300)
+
+      vendingMachine.selectTreat(candy)
+      assert.equal(vendingMachine.selection.name, 'Starbursts')
+      assert.equal(candy.price, 100)
+      assert.equal(vendingMachine.credits,200)
+    })
+  })
+
+
   // assertions to come :
     // Treat qty/selection  : mapping?
 });
