@@ -18,9 +18,6 @@ describe('Vending Machine', function() {
 
     // Assert the total number of credits is 100 cents ($1.00) after credits inserted
     assert.equal(vendingMachine.credits, 100)
-    // Assert the total number of change is 0 cents ($0.00) before selection is made
-    assert.equal(vendingMachine.change, 0)
-
     assert.equal(alex.credits, 400)
   });
 
@@ -31,9 +28,9 @@ describe('Vending Machine', function() {
     const candy = new Treat('Almond Joy', 75)
 
     vendingMachine.insertCredit(user, 75)
+    vendingMachine.selectTreat(user, candy)
     assert.equal(vendingMachine.credits, 75)
 
-    vendingMachine.selectTreat(candy)
     assert.equal(vendingMachine.selection, candy)
     assert.equal(vendingMachine.selection.name, 'Almond Joy')
     assert.equal(candy.price, 75)
@@ -46,7 +43,7 @@ describe('Vending Machine', function() {
     const candy = new Treat('Almond Joy', 75)
 
     vendingMachine.insertCredit(user, 50)
-    assert.equal(vendingMachine.selectTreat(candy), false)
+    assert.equal(vendingMachine.selectTreat(user, candy), false)
     assert.equal(vendingMachine.selection, null)
 
   })
@@ -57,7 +54,7 @@ describe('Vending Machine', function() {
     const candy = new Treat('Almond Joy', 75)
 
     vendingMachine.insertCredit(user, 75)
-    vendingMachine.selectTreat(candy)
+    vendingMachine.selectTreat(user, candy)
     vendingMachine.vend(user,candy)
 
     assert.equal(candy.name, 'Almond Joy')
@@ -70,11 +67,11 @@ describe('Vending Machine', function() {
     const candy = new Treat('Charleston Chew', 75)
 
     vendingMachine.insertCredit(user, 100)
-    vendingMachine.selectTreat(candy,user)
-
-    assert.equal(vendingMachine.change,25)
-    vendingMachine.vend(user,candy)
+    vendingMachine.selectTreat(user,candy)
+    //assert that change was given to user
     assert.equal(user.credits, 425)
+
+    vendingMachine.vend(user,candy)
   })
 
   context('insertCredit Function', () => {
@@ -96,7 +93,7 @@ describe('Vending Machine', function() {
       vendingMachine.insertCredit(user, 300)
       assert.equal(vendingMachine.credits, 300)
 
-      vendingMachine.selectTreat(candy)
+      vendingMachine.selectTreat(user, candy)
       assert.equal(vendingMachine.selection.name, 'Starbursts')
       assert.equal(candy.price, 100)
       assert.equal(vendingMachine.credits,200)
